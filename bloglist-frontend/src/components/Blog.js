@@ -35,23 +35,40 @@ const Blog = ({ blog, handleLikes, handleRemoval, username }) => {
     <div style={blogStyle} className='blog'>
       <div className='title'>
         &apos;{blog.title}&apos; by {blog.author}
-        <button id='details' style={{ marginLeft: '5px', marginBottom: '2px' }} onClick={toggleDetails}>{showDetails ? 'hide' : 'view'}</button>
+        <button
+          id='details'
+          style={{ marginLeft: '5px', marginBottom: '2px' }}
+          onClick={toggleDetails}
+        >
+          {showDetails ? 'hide' : 'view'}
+        </button>
       </div>
       {showDetails && (
         <div className='blog-details'>
           <div>URL: {blog.url}</div>
           <div>
             likes: {blog.likes}
-            <button id='addLike' style={{ marginLeft: '5px' }} onClick={addLike}>like</button>
+            <button
+              id='addLike'
+              style={{ marginLeft: '5px' }}
+              onClick={addLike}
+            >
+              like
+            </button>
           </div>
           <div>{blog.user.name}</div>
           {blog.user.username === username && (
-            <button id='delete' style={{ marginTop: '2px' }} onClick={removeBlog}>delete</button>
+            <button
+              id='delete'
+              style={{ marginTop: '2px' }}
+              onClick={removeBlog}
+            >
+              delete
+            </button>
           )}
         </div>
       )}
     </div>
-
   )
 }
 

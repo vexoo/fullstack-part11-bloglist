@@ -1,3 +1,5 @@
+/* global cy */
+
 describe('Blog app', function () {
   beforeEach(function () {
     cy.request('POST', 'http://localhost:3003/api/testing/reset')
@@ -7,7 +9,7 @@ describe('Blog app', function () {
       password: 'salainen'
     }
     cy.request('POST', 'http://localhost:3003/api/users/', user)
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:3003')
   })
 
   it('Login form is shown', function () {
@@ -93,7 +95,7 @@ describe('Blog app', function () {
       //cy.get('#delete').click()
       cy.contains('#delete').should('not.exist')
     })
-    it.only('A blog can not be deleted by anyone else', function () {
+    it('blogs are shown in order of likes', function () {
       cy.get('#newBlog').click()
       cy.get('#title').type('most liked blog')
       cy.get('#author').type('most liked author')
