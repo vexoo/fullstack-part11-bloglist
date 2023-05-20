@@ -4,7 +4,6 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Blog from './Blog'
 
-
 describe('Blog rendering', () => {
   const blog = {
     title: 'test blog',
@@ -19,20 +18,20 @@ describe('Blog rendering', () => {
   const mockHandler = jest.fn()
 
   test('renders title and author by default, but not url or likes', () => {
-    const component = render(
-      <Blog blog={blog} />
-    )
+    const component = render(<Blog blog={blog} />)
     //screen.debug()
-    expect(component.container.querySelector('.title')).toHaveTextContent(blog.title)
-    expect(component.container.querySelector('.title')).toHaveTextContent(blog.author)
+    expect(component.container.querySelector('.title')).toHaveTextContent(
+      blog.title
+    )
+    expect(component.container.querySelector('.title')).toHaveTextContent(
+      blog.author
+    )
     expect(component.queryByText(blog.url)).not.toBeInTheDocument()
     expect(component.queryByText('likes')).not.toBeInTheDocument()
   })
 
   test('clicking the view details button calls event handler once', () => {
-    const component = render(
-      <Blog blog={blog} />
-    )
+    const component = render(<Blog blog={blog} />)
     const button = component.container.querySelector('button')
     fireEvent.click(button)
 
@@ -40,9 +39,7 @@ describe('Blog rendering', () => {
   })
 
   test('clicking the like button twice calls event handler twice', () => {
-    const component = render(
-      <Blog blog={blog} handleLikes={mockHandler}/>
-    )
+    const component = render(<Blog blog={blog} handleLikes={mockHandler} />)
     const button = component.container.querySelector('button')
     fireEvent.click(button)
     //screen.debug()
@@ -52,7 +49,4 @@ describe('Blog rendering', () => {
 
     expect(mockHandler.mock.calls).toHaveLength(2)
   })
-
 })
-
-

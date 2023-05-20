@@ -1,4 +1,9 @@
-export const displayMessage = (message, isError, setErrorMessage, setErrorColor) => {
+export const displayMessage = (
+  message,
+  isError,
+  setErrorMessage,
+  setErrorColor
+) => {
   const color = isError ? 'red' : 'green'
   setErrorColor(color)
   setErrorMessage(message)
@@ -18,7 +23,6 @@ const Notification = ({ message, color }) => {
     padding: 10,
     marginBottom: 10
   }
-
 
   if (message === null) {
     return null

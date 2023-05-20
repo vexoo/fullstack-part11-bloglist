@@ -54,7 +54,9 @@ const BlogForm = ({ handleAddBlog }) => {
           onChange={handleInputChange}
         />
       </div>
-      <button id='createBlog' style={{ marginTop: '10px' }} type="submit">create</button>
+      <button id='createBlog' style={{ marginTop: '10px' }} type='submit'>
+        create
+      </button>
     </form>
   )
 }

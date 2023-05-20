@@ -5,15 +5,15 @@ const User = require('../models/user')
 usersRouter.post('/', async (request, response) => {
   const { username, name, password } = request.body
 
-  if (!(password)) {
+  if (!password) {
     return response.status(400).json({
-      error: "password is required",
+      error: 'password is required'
     })
   }
 
   if (password.length < 3) {
     return response.status(400).json({
-      error: "password must be at least 3 characters long",
+      error: 'password must be at least 3 characters long'
     })
   }
 
@@ -23,7 +23,7 @@ usersRouter.post('/', async (request, response) => {
   const user = new User({
     username,
     name,
-    passwordHash,
+    passwordHash
   })
 
   const savedUser = await user.save()

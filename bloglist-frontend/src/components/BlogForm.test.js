@@ -5,7 +5,6 @@ import BlogForm from './BlogForm'
 import userEvent from '@testing-library/user-event'
 
 test('<BlogForm /> calls the event handler when a new blog is created', async () => {
-
   const mockHandler = jest.fn()
 
   render(<BlogForm handleAddBlog={mockHandler} />)
@@ -15,5 +14,4 @@ test('<BlogForm /> calls the event handler when a new blog is created', async ()
   await user.click(button)
 
   expect(mockHandler).toBeCalledTimes(1)
-
 })
