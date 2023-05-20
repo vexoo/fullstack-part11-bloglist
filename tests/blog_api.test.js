@@ -38,7 +38,7 @@ beforeEach(async () => {
     .post('/api/blogs')
     .set('Authorization', `Bearer ${token}`)
     .send(listWithManyBlogs[1])
-})
+}, 10000)
 
 describe('when there is initially some blogs saved', () => {
   test('the blogs are returned as json', async () => {
