@@ -44,12 +44,6 @@ app.get('/health', (_req, res) => {
   res.send('ok')
 })
 
-/*
-app.get('/health', (req, res) => {
-  res.status(200).json({ message: 'Application is healthy' });
-});
-*/
-
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)
 
