@@ -31,8 +31,13 @@ jobs:
       - name: build
         run: npm run build:ui
 
-      - name: test backend
+		  - name: test backend
         run: npm test
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI}}
+          TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI}}
+          PORT: ${{ secrets.PORT }}
+          SECRET: ${{ secrets.SECRET }} 
 
       - name: test frontend
         run: npm run test:front
@@ -43,3 +48,8 @@ jobs:
           command: npm run test:e2e
           start: npm run start:test
           wait-on: http://localhost:3003
+					env:
+						MONGODB_URI: ${{ secrets.MONGODB_URI}}
+						TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI}}
+						PORT: ${{ secrets.PORT }}
+						SECRET: ${{ secrets.SECRET }} 
