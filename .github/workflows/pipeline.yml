@@ -34,8 +34,8 @@ jobs:
       - name: test backend
         run: npm test
         env:
-          MONGODB_URI: ${{ secrets.MONGODB_URI}}
-          TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI}}
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
           PORT: ${{ secrets.PORT }}
           SECRET: ${{ secrets.SECRET }} 
 
@@ -53,3 +53,19 @@ jobs:
           TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI}}
           PORT: ${{ secrets.PORT }}
           SECRET: ${{ secrets.SECRET }} 
+
+      - name: Deploy to Render
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }}
+        run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
+
+  tag_release:
+    needs: [deployment_pipeline]
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.64.0
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
